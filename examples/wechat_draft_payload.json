@@ -1,0 +1,14 @@
+{
+  "articles": [
+    {
+      "title": "一次发布链路整理",
+      "author": "产品小记",
+      "digest": "把草稿、发布和状态查询拆清楚，少踩两个坑。",
+      "content": "<p>今天主要处理草稿和发布状态。</p>",
+      "thumb_media_id": "REPLACE_WITH_THUMB_MEDIA_ID",
+      "content_source_url": "",
+      "need_open_comment": 0,
+      "only_fans_can_comment": 0
+    }
+  ]
+}
