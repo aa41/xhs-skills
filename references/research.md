@@ -61,3 +61,18 @@ Primary sources checked:
 Source checked:
 
 - https://github.com/JimLiu/baoyu-skills
+
+## 2026-06-10 GUI 自动化调研补充
+
+- Browser Use 官方 quickstart 把它定位为 AI browser agent，提供 Python agent、浏览器配置、production sandbox、profile/cookie 同步等能力。结论：可作为 GUI 自动化框架接入，但它不是小红书或微信的发布授权 API。
+- 本地 Codex 环境提供 Browser、Chrome 和 Computer Use 插件。Chrome 更适合复用用户登录态；Browser 更适合干净网页检查；Computer Use 适合无法通过 DOM/浏览器自动化处理的本机 UI。
+- 微信服务号官方文档当前可访问，草稿页列出 `/cgi-bin/draft/add`，发布能力页列出 `/cgi-bin/freepublish/submit` 和 `/cgi-bin/freepublish/get`，并提示 2025 年 7 月起部分账号会被回收调用权限。结论：公众号发布优先使用官方 API，网页 GUI 仅作为登录/核对/人工确认辅助。
+- 小红书公开网页 `www.xiaohongshu.com` 可访问；当前环境拉取 `creator.xiaohongshu.com`、`redopen.xiaohongshu.com`、`agora.xiaohongshu.com` 返回 TLS 连接错误。结合既有调研，仍未获得普通创作者账号稳定服务端一键发布 API 的官方证据。结论：小红书 GUI 只能写成辅助预填，最终发布必须人工确认。
+
+补充来源：
+
+- Browser Use quickstart: https://docs.browser-use.com/open-source/quickstart
+- 微信服务号草稿箱文档: https://developers.weixin.qq.com/doc/offiaccount/Draft_Box/Add_draft.html
+- 微信服务号发布能力文档: https://developers.weixin.qq.com/doc/offiaccount/Publish/Publish.html
+- 小红书网页入口: https://www.xiaohongshu.com/
+- 小红书创作平台入口: https://creator.xiaohongshu.com/

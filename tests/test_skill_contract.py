@@ -27,6 +27,7 @@ def test_required_references_and_scripts_are_present():
         "references/research.md",
         "references/roles.md",
         "references/style-guide.md",
+        "references/gui-automation.md",
         "references/publishing.md",
         "scripts/generate_gpt_image2.py",
         "scripts/plan_xhs_assets.py",
@@ -64,3 +65,14 @@ def test_skill_forbids_unstable_xhs_autopublish_claims():
     assert "Cookie" in publishing
     assert "人工确认" in publishing
     assert "access_key" in publishing
+
+
+def test_gui_automation_boundaries_are_explicit():
+    skill = read("SKILL.md")
+    gui = read("references/gui-automation.md")
+
+    assert "browser-use" in skill
+    assert "references/gui-automation.md" in skill
+    for keyword in ["Chrome", "Browser", "Computer Use", "人工确认", "最终发布", "不读取"]:
+        assert keyword in gui
+    assert "停在发布前" in gui

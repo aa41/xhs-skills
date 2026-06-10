@@ -18,6 +18,7 @@ Use this skill to turn real work notes into publishable 小红书 notes and 微�
 7. Package:
    - 小红书: use `scripts/package_xhs_note.py`; default to manual upload with assets and captions.
    - 微信公众号: use `scripts/publish_wechat.py` for inline image upload, cover material upload, draft creation, or official publish only when the account has valid credentials, certification status, and API permission.
+   - GUI-assisted publishing: if the user explicitly asks for browser-use, Browser, Chrome, or GUI login/prefill, read `references/gui-automation.md` and treat it as assisted prefill/checking unless an official API is available.
 
 ## Role Rules
 
@@ -58,6 +59,7 @@ Read `references/publishing.md` before promising automation.
 - 微信公众号 has official API paths using `access_token`: inline image upload (`upload-inline-image`), permanent material upload (`upload-material`), draft creation, publish submit, and publish status polling. Check current account eligibility; after July 2025, some personal/uncertified accounts may not have publish API permission.
 - 小红书: do not promise stable one-click public-note publishing for normal creator accounts. This skill does not claim that an `access_key` can publish notes unless the user provides official 小红书 partner/API documentation for their account type.
 - For 小红书, default to a prepared publish package and manual confirmation. Browser/Cookie automation is optional, fragile, and must be labeled experimental.
+- For GUI work, prefer Chrome when logged-in state matters, Browser for clean web inspection, and Computer Use only when DOM/browser automation is insufficient. Never read cookies or bypass login, CAPTCHA, review, or risk controls. Stop before final public publish unless the user confirms at action time.
 
 ## Multi-Agent Review Rubric
 
@@ -74,6 +76,7 @@ Run these three review passes before final delivery:
 - `references/style-guide.md`: anti-AI writing and 小红书 visual guidance.
 - `references/image-env.md`: GPT Image 2 `.env` setup for official OpenAI or relay services.
 - `references/publishing.md`: WeChat API and XHS publishing decision tree.
+- `references/gui-automation.md`: explicit Browser/Chrome/Computer Use/browser-use assisted publishing modes and safety boundaries.
 - `scripts/generate_gpt_image2.py`: GPT Image 2 request builder/generator.
 - `scripts/plan_xhs_assets.py`: content complexity to image plan.
 - `scripts/review_content.py`: deterministic copy smell check.

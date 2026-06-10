@@ -13,6 +13,7 @@
 - 使用 `scripts/generate_gpt_image2.py` 通过 GPT Image 2 或兼容 relay 生成图片。
 - 使用 `scripts/package_xhs_note.py` 生成小红书人工发布包。
 - 使用 `scripts/publish_wechat.py` 走微信公众号官方 API：上传封面素材、上传正文图片、创建草稿、提交发布、查询发布状态。
+- 在运行环境提供工具时，可显式使用 Browser、Chrome、Computer Use 或外部 browser-use 做登录、预填和核对辅助。
 - 明确区分可稳定自动化的公众号官方 API 和需要人工确认的小红书普通账号发布流程。
 
 ## 目录结构
@@ -124,6 +125,16 @@ python3.12 scripts/package_xhs_note.py \
 
 测试方式是登录小红书后台或 App，按 `images/` 编号顺序上传图片，再人工复制标题、正文和标签，最后人工确认发布。
 
+### GUI 辅助预填
+
+可以显式要求 agent 使用浏览器辅助：
+
+```text
+用 @chrome 辅助打开小红书创作平台，把 outputs/demo/xhs-package 预填好，停在发布前让我确认
+```
+
+推荐用 Chrome 复用本机登录态；如果没有登录态，用户扫码或手动登录。agent 可以上传图片、粘贴标题正文、核对首图裁切，但不能绕过验证码、平台审核或风控，最终发布前必须再次确认。
+
 ## 微信公众号发布测试
 
 公众号发布分三层测试：本地 dry-run、创建草稿、提交发布。
@@ -179,10 +190,21 @@ python3.12 scripts/publish_wechat.py status \
 
 注意：草稿创建成功不等于发布成功，发布后必须查询状态。
 
+### 网页后台辅助核对
+
+公众号优先使用官方 API 创建草稿；网页 GUI 更适合核对草稿和人工确认：
+
+```text
+用 @chrome 打开微信公众号后台，我扫码登录后帮我核对草稿，不要发布
+```
+
+如果需要网页端提交发布，agent 应停在最终确认前，或在 action-time 向用户确认。
+
 ## 发布边界
 
 - 小红书普通账号：默认只生成发布包并要求人工确认；不承诺 Cookie 自动化、逆向接口或 `access_key` 直发稳定可用。
 - 微信公众号：只使用官方 API；是否能发布取决于账号类型、认证状态、接口权限和后台配置。
+- GUI/browser-use：只作为辅助登录、预填、核对和人工确认工具；不是平台授权发布接口。
 - 图片生成：优先使用 GPT Image 2；如果 relay 不支持对应模型，需要在 `.env` 中显式覆盖 `OPENAI_IMAGE_MODEL`。
 - 密钥：不要提交 `.env`、access token、AppSecret 或 relay key。
 
@@ -206,4 +228,3 @@ python3.12 -m pytest -q
 git status --short
 python3.12 -m pytest -q
 ```
-
