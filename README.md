@@ -76,7 +76,7 @@ OPENAI_IMAGE_MODEL=gpt-image-2
 
 ```bash
 python3.12 scripts/review_content.py \
-  --text-file outputs/demo/xhs-caption.md \
+  --file outputs/demo/xhs-caption.md \
   --role daily-dev-log \
   --out outputs/demo/review.json
 ```
@@ -85,7 +85,7 @@ python3.12 scripts/review_content.py \
 
 ```bash
 python3.12 scripts/plan_xhs_assets.py \
-  --text-file outputs/demo/xhs-caption.md \
+  --file outputs/demo/xhs-caption.md \
   --role daily-dev-log \
   --out outputs/demo/asset-plan.json
 ```

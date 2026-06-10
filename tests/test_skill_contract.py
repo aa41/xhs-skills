@@ -76,3 +76,11 @@ def test_gui_automation_boundaries_are_explicit():
     for keyword in ["Chrome", "Browser", "Computer Use", "人工确认", "最终发布", "不读取"]:
         assert keyword in gui
     assert "停在发布前" in gui
+
+
+def test_readme_uses_current_script_cli_arguments():
+    readme = read("README.md")
+
+    assert "--text-file" not in readme
+    assert "scripts/review_content.py \\\n  --file outputs/demo/xhs-caption.md" in readme
+    assert "scripts/plan_xhs_assets.py \\\n  --file outputs/demo/xhs-caption.md" in readme
